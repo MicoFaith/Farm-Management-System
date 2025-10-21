@@ -1,0 +1,6 @@
+<h1>Add Farmer</h1>
+<form method="post">
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit">Save</button>
+</form>
+<a href="{% url 'farmer_list' %}">Back</a>

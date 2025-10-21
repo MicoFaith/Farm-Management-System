@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Farmers List</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+      .json-view {
+        background-color: #f5f5f5;
+        padding: 20px;
+        border-radius: 5px;
+        margin-top: 20px;
+        font-family: monospace;
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Farmers</h1>
+    <a href="{% url 'farmer_create' %}" class="btn">Add Farmer</a>
+
+    {% comment %}
+    <h2>Regular View</h2>
+    <ul>
+      {% for farmer in farmers %}
+      <li>{{ farmer.name }} - {{ farmer.farm }}</li>
+      {% empty %}
+      <li>No farmers found.</li>
+      {% endfor %}
+    </ul>
+    {% endcomment %}
+
+    <!-- <h2>JSON View</h2> -->
+    <div id="json-data" class="json-view">Loading...</div>
+
+    <script>
+      $(document).ready(function () {
+        $.get("{% url 'farmers_json' %}", function (data) {
+          $("#json-data").text(
+            JSON.stringify(JSON.parse(data.farmers), null, 2)
+          );
+        });
+      });
+    </script>
+  </body>
+</html>
